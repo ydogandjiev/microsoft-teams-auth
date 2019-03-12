@@ -33,6 +33,6 @@ export class SilentStart extends Component {
   }
 
   render() {
-    return <></>;
+    return <h3>Authenticating...</h3>;
   }
 }

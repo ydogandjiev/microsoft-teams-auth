@@ -12,7 +12,7 @@ const config: AdalConfig = {
 };
 
 export class SilentEnd extends Component {
-	componentDidMount() {
+  componentDidMount() {
     microsoftTeams.initialize();
 
     const authContext = new AuthenticationContext(config);
@@ -30,7 +30,7 @@ export class SilentEnd extends Component {
     }
   }
 
-	render() {
-		return <h2> SILENT END </h2>;
-	}
+  render() {
+    return <h3>Done!</h3>;
+  }
 }

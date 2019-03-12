@@ -74,23 +74,20 @@ export class Silent extends Component {
 
     // See if there's a cached user and it matches the expected user
     const user = authContext.getCachedUser();
-    if (user) {
-      if (user.userName !== upn) {
-        // User doesn't match, clear the cache
-        authContext.clearCache();
-      }
+    if (user && user.userName !== upn) {
+      // User doesn't match, clear the cache
+      authContext.clearCache();
     }
 
     // Get the id token (which is the access token for resource = clientId)
     const token = authContext.getCachedToken(config.clientId);
     if (token) {
-      // showProfileInformation(token);
-      console.log("token ", token);
+      this.showProfileInformation(token);
     } else {
       // No token, or token is expired
       (authContext as any)._renewIdToken((err: string, idToken: string) => {
         if (err) {
-          console.log("Renewal failed: " + err);
+          console.error("Renewal failed: " + err);
 
           // Failed to get the token silently; show the login button
           this.btnLoginRef.current!.setAttribute("style", "display: ''");
@@ -98,8 +95,7 @@ export class Silent extends Component {
           // You could attempt to launch the login popup here, but in browsers this could be blocked by
           // a popup blocker, in which case the login attempt will fail with the reason FailedToOpenWindow.
         } else {
-          // showProfileInformation(idToken);
-          console.log("token ", idToken);
+          this.showProfileInformation(idToken);
         }
       });
     }
@@ -119,7 +115,7 @@ export class Silent extends Component {
         const authContext = new AuthenticationContext(config);
         const idToken = authContext.getCachedToken(config.clientId);
         if (idToken) {
-          // showProfileInformation(idToken);
+          this.showProfileInformation(idToken);
         } else {
           console.error("Error getting cached id token. This should never happen.");
 
@@ -130,9 +126,9 @@ export class Silent extends Component {
 
       failureCallback: reason => {
         if (reason === "CancelledByUser" || reason === "FailedToOpenWindow") {
-          console.log("Login was blocked by popup blocker or canceled by user.");
+          console.error("Login was blocked by popup blocker or canceled by user.");
         } else {
-          console.log("Login failed: " + reason);
+          console.error("Login failed: " + reason);
         }
 
         // At this point we have to get the user involved, so show the login button
@@ -142,5 +138,9 @@ export class Silent extends Component {
         this.divProfile.current!.setAttribute("style", "display: 'none'");
       },
     });
+  };
+
+  showProfileInformation = (token: string) => {
+    console.log("Token acquired: ", token);
   };
 }
