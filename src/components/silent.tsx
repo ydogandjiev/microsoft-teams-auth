@@ -3,6 +3,7 @@ import * as microsoftTeams from "@microsoft/teams-js";
 import { AuthenticationContext, AdalConfig } from "react-adal";
 import { clientId } from "../utils/config";
 
+// ADAL.js configuration
 const config: AdalConfig = {
   clientId: clientId,
   redirectUri: window.location.origin,
