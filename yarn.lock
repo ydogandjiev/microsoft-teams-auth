@@ -6935,9 +6935,9 @@ rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-adal@^0.4.22:
-  version "0.4.22"
-  resolved "https://registry.yarnpkg.com/react-adal/-/react-adal-0.4.22.tgz#53f22c55a82dc764cb664960b3820c2b7615d871"
+react-adal@^0.5.1:
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/react-adal/-/react-adal-0.5.1.tgz#2a3ccd4a57057dbac6a10efce3f0eee56c16a4cb"
 
 react-app-polyfill@^0.2.2:
   version "0.2.2"
